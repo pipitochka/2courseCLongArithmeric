@@ -32,7 +32,7 @@ std::string BigDecimal::divideByTwo(const std::string& number) {
     while (result.size() > 1 && result[0] == '0') {
         result.erase(result.begin());
     }
-
+    
     return result;
 }
 
@@ -53,7 +53,7 @@ std::string BigDecimal::multiplyByTwo(const std::string& num) {
     return result;
 }
 
-std::string BigDecimal::decimalStringToBinary(std::string &number) {
+std::string BigDecimal::decimalToBinary(std::string &number) {
     std::string binary;
 
     while (number != "0") {
@@ -86,22 +86,57 @@ std::string BigDecimal::decimalFractionToBinary(const std::string &fraction, int
 
 std::string BigDecimal::binaryIntegerToDecimal(const std::string& integerPart) {
     std::string result = "0";
-    for (int i = 0; i < integerPart.size(); i++) {
-        if (integerPart[i] == '1') {
-            result = addBinary(result, powerOfTwo(i));
+    std::string two = "1";
+    std::string copy = integerPart;
+    std::reverse(copy.begin(), copy.end());
+    for (int i = 0; i < copy.size(); i++) {
+        if (copy[i] == '1') {
+            result = addBinary(result, two);
         }
+        two = addBinary(two, two);
     }
     return result;
 }
 
-std::string BigDecimal::binaryFractionToDecimal(const std::string& fractionalPart) {
-    std::string result = "0";
-    for (int i = 0; i < fractionalPart.size(); i++) {
-        if (fractionalPart[i] == '1') {
-            result = addBinary(result, powerOfTwo(-i - 1));  
-        }
+std::string BigDecimal::divideByTwoDecimal(const std::string& number) {
+    std::string result;
+    int carry = 0;
+
+    for (char digit : number) {
+        int current = carry * 10 + (digit - '0'); 
+        result += (current / 2) + '0'; 
+        carry = current % 2; 
+    }
+    
+    if (carry != 0) {
+        result += '5';
     }
     return result;
+}
+
+
+std::string BigDecimal::binaryFractionToDecimal(const std::string& fractionalPart) {
+    std::string result = "0";
+    std::string two = "5";
+    for (int i = 0; i < fractionalPart.size(); i++) {
+        if (fractionalPart[i] == '1') {
+             result = addBinaryLeft(result, two);
+             }
+        two = divideByTwoDecimal(two);
+    }
+    return result;
+}
+
+std::string BigDecimal::addBinaryLeft(const std::string& num1, const std::string& num2) {
+    std::string copy1 = num1;
+    std::string copy2 = num2;
+    while (copy1.size() < copy2.size()) {
+        copy1.push_back('0');
+    }
+    while (copy2.size() < copy1.size()) {
+        copy2.push_back('0');
+    }
+    return addBinary(copy1, copy2);
 }
 
 std::string BigDecimal::addBinary(const std::string& num1, const std::string& num2) {
@@ -126,18 +161,6 @@ std::string BigDecimal::addBinary(const std::string& num1, const std::string& nu
     return result;
 }
 
-std::string BigDecimal::powerOfTwo(int exponent) {
-    if (exponent < 0) {
-        return "0";  
-    }
-
-    std::string result = "1";
-    for (int i = 0; i < exponent; i++) {
-        result = addBinary(result, result);
-    }
-    return result;
-}
-
 std::string BigDecimal::binaryToDecimal(const std::string& binary) {
     std::string integerPart, fractionalPart;
     bool isFractional = false;
@@ -157,7 +180,6 @@ std::string BigDecimal::binaryToDecimal(const std::string& binary) {
     std::string integerResult = binaryIntegerToDecimal(integerPart);
 
     std::string fractionalResult = binaryFractionToDecimal(fractionalPart);
-
     if (!fractionalResult.empty()) {
         return integerResult + "." + fractionalResult;
     } else {
@@ -205,19 +227,6 @@ BigDecimal operator ""_longnum(long double number) {
     return result;
 }
 
-std::ostream & operator<<(std::ostream &os, const BigDecimal &bd) {
-    for (int i = 0; i < bd._left; i++) {
-        os << static_cast<char>(bd._dataLeft[i] + '0');
-    }
-    if (bd._right > 0) {
-        os << '.';
-        for (int i = 0; i < bd._right; i++) {
-            os << static_cast<char>(bd._dataRight[i] + '0');
-        }
-    }
-    return os;
-}
-
 BigDecimal::BigDecimal(const std::string& s, int n) {
     std::string left, right = "";
     left = s;
@@ -242,7 +251,7 @@ BigDecimal::BigDecimal(const std::string& s, int n) {
 };
 
 void BigDecimal::Convert(std::string &s1, std::string &s2, int n) {
-    std::string left = decimalStringToBinary(s1);
+    std::string left = decimalToBinary(s1);
     std::string right = decimalFractionToBinary(s2, n);
     std::vector<char> leftData, rightData;
     for (int i = 0; i < left.size(); i++) {
@@ -258,3 +267,19 @@ void BigDecimal::Convert(std::string &s1, std::string &s2, int n) {
 }
 
 BigDecimal BigDecimal::operator+(const BigDecimal &other) {}
+
+std::ostream & operator<<(std::ostream &os, const BigDecimal &bd) {
+    std::string ss;
+    for (int i = 0; i < bd._dataLeft.size(); i++) {
+        ss += bd._dataLeft[i] + '0';
+    }
+    if (bd._dataRight.size() > 0) {
+        ss += '.';
+        for (int i = 0; i < bd._dataRight.size(); i++) {
+            ss += bd._dataRight[i] + '0';
+        }
+    }
+    ss = BigDecimal::binaryToDecimal(ss);
+    os << ss;
+    return os;
+}

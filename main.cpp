@@ -3,8 +3,7 @@
 
 int main()
 {
-    BigDecimal bg = BigDecimal("123.123");
+    BigDecimal bg = BigDecimal("8.75");
     std::cout << bg << std::endl;
-    std::cout << bg.binaryToDecimal("1111011.00011111011111001110");
     return 0;
 }

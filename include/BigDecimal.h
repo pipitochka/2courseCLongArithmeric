@@ -20,19 +20,20 @@ class BigDecimal{
     BigDecimal expand(int x, int y) const;
     void Convert(std::string &s1, std::string &s2, int n);
     
-    std::string divideByTwo(const std::string &number);
-    std::string multiplyByTwo(const std::string& num);
-    std::string decimalStringToBinary(std::string &number);
-    std::string decimalFractionToBinary(const std::string &fraction, int precision);
+    static std::string divideByTwo(const std::string &number);
+    static std::string multiplyByTwo(const std::string& num);
+    static std::string decimalFractionToBinary(const std::string &fraction, int precision);
+    static std::string divideByTwoDecimal(const std::string& number);
     
-    std::string powerOfTwo(int exponent);
-    std::string addBinary(const std::string& num1, const std::string& num2);
-    std::string binaryFractionToDecimal(const std::string& fractionalPart);
-    std::string binaryIntegerToDecimal(const std::string& integerPart);
+    static std::string addBinary(const std::string& num1, const std::string& num2);
+    static std::string binaryFractionToDecimal(const std::string& fractionalPart);
+    static std::string binaryIntegerToDecimal(const std::string& integerPart);
+    static std::string addBinaryLeft(const std::string& num1, const std::string& num2);
     
-    public:
+    static std::string binaryToDecimal(const std::string &binary);
+    static std::string decimalToBinary(std::string &number);
 
-    std::string binaryToDecimal(const std::string &binary);
+public:
     
     BigDecimal() = delete;
     BigDecimal(int left, int right);
