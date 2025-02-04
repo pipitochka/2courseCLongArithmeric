@@ -3,7 +3,10 @@
 
 int main()
 {
-    BigDecimal bg = BigDecimal("8.75");
-    std::cout << bg << std::endl;
-    return 0;
+    BigDecimal bg1 = BigDecimal("1.23");
+    BigDecimal bg2 = BigDecimal("1.23", 5);
+    BigDecimal bg3 = 1.23_longnum;
+    BigDecimal bg4 = bg2 - bg1; 
+    BigDecimal bg5 = bg2 * bg1;
+    std::cout << bg5;
 }
