@@ -1,7 +1,4 @@
-//
-// Created by Артем Акулов on 29.01.2025.
-//
-#include "../include/BigDecimal.h"
+#include "../include/bigDecimal.h"
 #include <iostream>
 
 BigDecimal BigDecimal::expand(int x, int y) const {
@@ -17,7 +14,6 @@ BigDecimal BigDecimal::expand(int x, int y) const {
     }
     return BigDecimal(left, right);
 }
-
 
 std::string BigDecimal::divideByTwo(const std::string& number) {
     std::string result;
@@ -62,7 +58,7 @@ std::string BigDecimal::decimalToBinary(std::string &number) {
         number = divideByTwo(number); // Делим число на 2
     }
 
-    std::reverse(binary.begin(), binary.end()); // Разворачиваем строку
+    //std::reverse(binary.begin(), binary.end()); // Разворачиваем строку
 
     return binary;
 }
@@ -83,12 +79,10 @@ std::string BigDecimal::decimalFractionToBinary(const std::string &fraction, int
     return result;
 }
 
-
 std::string BigDecimal::binaryIntegerToDecimal(const std::string& integerPart) {
     std::string result = "0";
     std::string two = "1";
     std::string copy = integerPart;
-    std::reverse(copy.begin(), copy.end());
     for (int i = 0; i < copy.size(); i++) {
         if (copy[i] == '1') {
             result = addBinary(result, two);
@@ -113,7 +107,6 @@ std::string BigDecimal::divideByTwoDecimal(const std::string& number) {
     }
     return result;
 }
-
 
 std::string BigDecimal::binaryFractionToDecimal(const std::string& fractionalPart) {
     std::string result = "0";
@@ -187,8 +180,8 @@ std::string BigDecimal::binaryToDecimal(const std::string& binary) {
     }
 }
 
-
 BigDecimal::BigDecimal(int left, int right) : _left(left), _right(right) {
+    _sign = true;;
     _dataLeft.resize(_left);
     _dataRight.resize(_right);
     std::fill(_dataLeft.begin(), _dataLeft.end(), false);
@@ -196,6 +189,7 @@ BigDecimal::BigDecimal(int left, int right) : _left(left), _right(right) {
 };
 
 BigDecimal::BigDecimal(const BigDecimal &other) {
+    _sign = other._sign;
     _left = other._left;
     _right = other._right;
     _dataLeft.resize(_left);
@@ -205,6 +199,7 @@ BigDecimal::BigDecimal(const BigDecimal &other) {
 }
 
 BigDecimal::BigDecimal(const std::vector<char> &left , const std::vector<char> &right ) {
+    _sign = true;
     _dataLeft = left;
     _dataRight = right;
     _left = _dataLeft.size();
@@ -218,6 +213,7 @@ BigDecimal &BigDecimal::operator=(const BigDecimal &other) {
     _dataRight.resize(_right);
     std::copy(other._dataLeft.begin(), other._dataLeft.end(), _dataLeft.begin());
     std::copy(other._dataRight.begin(), other._dataRight.end(), _dataRight.begin());
+    _sign = other._sign;
     return *this;
 }
 
@@ -227,7 +223,16 @@ BigDecimal operator ""_longnum(long double number) {
     return result;
 }
 
-BigDecimal::BigDecimal(const std::string& s, int n) {
+BigDecimal::BigDecimal(const std::string& ss, int n) {
+    std::string s;
+    if (ss[0] == '-') {
+        _sign = false;
+        s = ss.substr(1, s.size() - 1);
+    }
+    else {
+        _sign = true;
+        s = ss;
+    }
     std::string left, right = "";
     left = s;
     int i = 0;
@@ -266,10 +271,11 @@ void BigDecimal::Convert(std::string &s1, std::string &s2, int n) {
     _right = _dataRight.size();
 }
 
-BigDecimal BigDecimal::operator+(const BigDecimal &other) {}
-
 std::ostream & operator<<(std::ostream &os, const BigDecimal &bd) {
     std::string ss;
+    if (!bd._sign) {
+        os << '-';
+    }
     for (int i = 0; i < bd._dataLeft.size(); i++) {
         ss += bd._dataLeft[i] + '0';
     }
@@ -283,3 +289,4 @@ std::ostream & operator<<(std::ostream &os, const BigDecimal &bd) {
     os << ss;
     return os;
 }
+

@@ -13,6 +13,7 @@ class InvalidChar : public std::exception {
 
 class BigDecimal{
     private:
+    bool _sign;
     int _left;
     int _right;
     std::vector<char> _dataLeft;
@@ -42,17 +43,17 @@ public:
     ~BigDecimal() = default;
     BigDecimal(const BigDecimal& other);
     BigDecimal(const std::vector<char> &left, const std::vector<char> &right);
-    
     BigDecimal& operator=(const BigDecimal& other);
-    BigDecimal operator+(const BigDecimal& other);
-    BigDecimal operator-(const BigDecimal& other);
-    BigDecimal operator*(const BigDecimal& other);
-    BigDecimal operator/(const BigDecimal& other);
+    
+    BigDecimal operator+(const BigDecimal& other) const;
+    BigDecimal operator-(const BigDecimal& other) const;
+    BigDecimal operator*(const BigDecimal& other) const;
+    BigDecimal operator/(const BigDecimal& other) const;
 
-    bool operator==(const BigDecimal& other);
-    bool operator!=(const BigDecimal& other);
-    bool operator<(const BigDecimal& other);
-    bool operator>(const BigDecimal& other);
+    bool operator==(const BigDecimal& other) const;
+    bool operator!=(const BigDecimal& other) const;
+    bool operator<(const BigDecimal& other) const;
+    bool operator>(const BigDecimal& other) const;
     
     friend std::ostream& operator << (std::ostream &os, const BigDecimal &bd);
 };

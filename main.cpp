@@ -3,10 +3,8 @@
 
 int main()
 {
-    BigDecimal bg1 = BigDecimal("1.23");
-    BigDecimal bg2 = BigDecimal("1.23", 5);
-    BigDecimal bg3 = 1.23_longnum;
-    BigDecimal bg4 = bg2 - bg1; 
-    BigDecimal bg5 = bg2 * bg1;
-    std::cout << bg5;
+    BigDecimal bg1 = BigDecimal("6", 12);
+    BigDecimal bg2 = BigDecimal("8", 12);
+    std::cout << bg2 + bg1 << std::endl;
+    std::cout << bg2 + bg2 << std::endl;
 }
