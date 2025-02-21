@@ -41,10 +41,15 @@ BigDecimal bg4 = bg2 - bg1;
 BigDecimal bg5 = bg2 * bg1;
 std::cout << bg5;
 ```
+Чтобы посчитать n знаков числа pi нужно восользоваться функцией (обратите внимание, функция считает количество знаков в двоичном виде)
+```cpp
+BigDecimal bg = generatePiDigits(int n);
+```
+
 
 ## Тесты
 Тесты будут находиться в папке test, запустить их можно следубщими командами
 ```sh
-$ tests
-$ ./tests
+$ cd tests
+$ ./testsType
 ```

@@ -5,10 +5,17 @@
 
 #include <algorithm>
 #include <vector>
+#include <iostream>
+#include <string>
+#include <exception>
+#include <deque>
+
 
 class InvalidChar : public std::exception {
     public:
-    const char* what() const throw() {}
+    const char* what() const noexcept override {
+        return "Invalid character";
+    }
 };
 
 class BigDecimal{
@@ -16,10 +23,11 @@ class BigDecimal{
     bool _sign;
     int _left;
     int _right;
-    std::vector<char> _dataLeft;
-    std::vector<char> _dataRight;
+    std::vector<int> _dataLeft;
+    std::vector<int> _dataRight;
     BigDecimal expand(int x, int y) const;
     void Convert(std::string &s1, std::string &s2, int n);
+    void changeSign();
     
     static std::string divideByTwo(const std::string &number);
     static std::string multiplyByTwo(const std::string& num);
@@ -34,6 +42,9 @@ class BigDecimal{
     static std::string binaryToDecimal(const std::string &binary);
     static std::string decimalToBinary(std::string &number);
 
+    void erazeZeros();
+    void reduceOverflow();
+
 public:
     
     BigDecimal() = delete;
@@ -42,7 +53,7 @@ public:
     BigDecimal(const std::string& s) : BigDecimal(s, PRECISION) {};
     ~BigDecimal() = default;
     BigDecimal(const BigDecimal& other);
-    BigDecimal(const std::vector<char> &left, const std::vector<char> &right);
+    BigDecimal(const std::vector<int> &left, const std::vector<int> &right);
     BigDecimal& operator=(const BigDecimal& other);
     
     BigDecimal operator+(const BigDecimal& other) const;
@@ -56,6 +67,8 @@ public:
     bool operator>(const BigDecimal& other) const;
     
     friend std::ostream& operator << (std::ostream &os, const BigDecimal &bd);
+
+    static BigDecimal generatePiDigits(int n);
 };
 
 BigDecimal operator""_longnum(long double number);

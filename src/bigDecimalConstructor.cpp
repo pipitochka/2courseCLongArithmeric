@@ -1,10 +1,9 @@
 #include "../include/bigDecimal.h"
-#include <iostream>
 
 BigDecimal BigDecimal::expand(int x, int y) const {
-    std::vector<char> left(x);
+    std::vector<int> left(x);
     std::fill(left.begin(), left.end(), 0);
-    std::vector<char> right(y);
+    std::vector<int> right(y);
     std::fill(right.begin(), right.end(), 0);
     for (int i = x - _left; i < x; i++) {
         left[i] = _dataLeft[i - x + _left];
@@ -198,7 +197,7 @@ BigDecimal::BigDecimal(const BigDecimal &other) {
     std::copy(other._dataRight.begin(), other._dataRight.end(), _dataRight.begin());
 }
 
-BigDecimal::BigDecimal(const std::vector<char> &left , const std::vector<char> &right ) {
+BigDecimal::BigDecimal(const std::vector<int> &left , const std::vector<int> &right ) {
     _sign = true;
     _dataLeft = left;
     _dataRight = right;
@@ -253,12 +252,13 @@ BigDecimal::BigDecimal(const std::string& ss, int n) {
         right = s.substr(i + 1, s.size() - i);
         Convert(left, right, n);
     }
+    this->erazeZeros();
 };
 
 void BigDecimal::Convert(std::string &s1, std::string &s2, int n) {
     std::string left = decimalToBinary(s1);
     std::string right = decimalFractionToBinary(s2, n);
-    std::vector<char> leftData, rightData;
+    std::vector<int> leftData, rightData;
     for (int i = 0; i < left.size(); i++) {
         leftData.push_back(left[i] - '0');
     }
@@ -279,6 +279,9 @@ std::ostream & operator<<(std::ostream &os, const BigDecimal &bd) {
     for (int i = 0; i < bd._dataLeft.size(); i++) {
         ss += bd._dataLeft[i] + '0';
     }
+    if (bd._dataRight.size() == 0) {
+        ss += '0';
+    }
     if (bd._dataRight.size() > 0) {
         ss += '.';
         for (int i = 0; i < bd._dataRight.size(); i++) {
@@ -290,3 +293,36 @@ std::ostream & operator<<(std::ostream &os, const BigDecimal &bd) {
     return os;
 }
 
+void BigDecimal::changeSign() {
+    this->_sign *= false;
+}
+
+void BigDecimal::erazeZeros() {
+    int zeros = 0;
+    while ((this->_left - 1 - zeros) >= 0 && this->_dataLeft[this->_left - 1 - zeros] == 0) {
+        zeros++;
+    }
+    this->_left -= zeros;
+    this->_dataLeft.resize(this->_left);
+}
+
+void BigDecimal::reduceOverflow() {
+    int overflow = 0;
+    for (int i = this->_right - 1; i >= 0; i--) {
+        this->_dataRight[i] += overflow;
+        overflow = this->_dataRight[i] / 2;
+        this->_dataRight[i] = this->_dataRight[i] % 2;
+    }
+
+    for (int i = 0; i < this->_left; i++) {
+        this->_dataLeft[i] += overflow;
+        overflow = this->_dataLeft[i] / 2;
+        this->_dataLeft[i] = this->_dataLeft[i] % 2;
+    }
+
+    while (overflow) {
+        this->_left++;
+        this->_dataLeft.push_back(overflow % 2);
+        overflow /= 2;
+    }
+}
