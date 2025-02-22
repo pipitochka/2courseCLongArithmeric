@@ -1,7 +1,10 @@
 #include <iostream>
+#include "include/BigDecimal.h"
 
 int main()
 {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+    BigDecimal bg1 = BigDecimal("6", 12);
+    BigDecimal bg2 = BigDecimal("8", 12);
+    std::cout << bg2 + bg1 << std::endl;
+    std::cout << bg2 + bg2 << std::endl;
 }
