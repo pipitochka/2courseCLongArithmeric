@@ -1,5 +1,5 @@
 #include <iostream>
-#include "include/BigDecimal.h"
+#include "include/bigDecimal.h"
 
 int main()
 {
