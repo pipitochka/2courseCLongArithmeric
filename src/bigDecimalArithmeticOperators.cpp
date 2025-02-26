@@ -257,10 +257,12 @@ BigDecimal BigDecimal::operator/(const BigDecimal& other) const {
     return tmp;
 }
 
-
 BigDecimal BigDecimal::generatePiDigits(int n) {
-    n *= 7;
-    n /= 2;
+    auto _start = std::chrono::steady_clock::now();
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - _start);
+    std::cout <<  duration.count() << std::endl;
+    n *= 4;
     BigDecimal sixteen("16", n);
     BigDecimal q("1", n);
     BigDecimal l("0", n);
@@ -273,6 +275,10 @@ BigDecimal BigDecimal::generatePiDigits(int n) {
     BigDecimal result("0", n);
     BigDecimal zero("0", n);
 
+    end = std::chrono::high_resolution_clock::now();
+    duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - _start);
+    std::cout <<  duration.count() << std::endl;
+    
     for (int i = 0; i < n; i++) {
         BigDecimal term1 = four / (l + one);
         BigDecimal term2 = two / (l + four);
@@ -288,6 +294,8 @@ BigDecimal BigDecimal::generatePiDigits(int n) {
         l = l + eight;
         q = q / sixteen; 
     }
-
+    end = std::chrono::high_resolution_clock::now();
+    duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - _start);
+    std::cout <<  duration.count() << std::endl;
     return result;
 }

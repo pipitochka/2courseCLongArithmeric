@@ -124,8 +124,9 @@ void testAdd7() {
 int main() {
     testAdd1();
     testAdd2();
-    //testAdd3();
+    testAdd3();
     testAdd4();
     testAdd5();
     testAdd6();
+    testAdd7();
 }
