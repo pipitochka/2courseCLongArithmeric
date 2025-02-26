@@ -1,9 +1,0 @@
-/Users/artemakulov/Study/2 course/2 sem/C++/LongArithmetic/cmake-build-debug-coverage/CMakeFiles/BIGDECIMAL.dir
-/Users/artemakulov/Study/2 course/2 sem/C++/LongArithmetic/cmake-build-debug-coverage/CMakeFiles/testsLogic.dir
-/Users/artemakulov/Study/2 course/2 sem/C++/LongArithmetic/cmake-build-debug-coverage/CMakeFiles/testsAdd.dir
-/Users/artemakulov/Study/2 course/2 sem/C++/LongArithmetic/cmake-build-debug-coverage/CMakeFiles/testsMul.dir
-/Users/artemakulov/Study/2 course/2 sem/C++/LongArithmetic/cmake-build-debug-coverage/CMakeFiles/testsDiv.dir
-/Users/artemakulov/Study/2 course/2 sem/C++/LongArithmetic/cmake-build-debug-coverage/CMakeFiles/testsPi.dir
-/Users/artemakulov/Study/2 course/2 sem/C++/LongArithmetic/cmake-build-debug-coverage/CMakeFiles/LongArithmetic.dir
-/Users/artemakulov/Study/2 course/2 sem/C++/LongArithmetic/cmake-build-debug-coverage/CMakeFiles/edit_cache.dir
-/Users/artemakulov/Study/2 course/2 sem/C++/LongArithmetic/cmake-build-debug-coverage/CMakeFiles/rebuild_cache.dir
