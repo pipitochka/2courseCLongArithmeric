@@ -1,0 +1,114 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.23"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "LongArithmetic",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "BIGDECIMAL::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-BIGDECIMAL-Debug-71ffafaa754834e879bb.json",
+					"name" : "BIGDECIMAL",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "LongArithmetic::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-LongArithmetic-Debug-8def66a1f5c45e602e00.json",
+					"name" : "LongArithmetic",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "testsAdd::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-testsAdd-Debug-3795fc94e6ba09c72128.json",
+					"name" : "testsAdd",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "testsDiv::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-testsDiv-Debug-3a888d0608e80914887a.json",
+					"name" : "testsDiv",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "testsLogic::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-testsLogic-Debug-ec3fdba2e881e6071c73.json",
+					"name" : "testsLogic",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "testsMul::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-testsMul-Debug-d017196baf15db8d8d9d.json",
+					"name" : "testsMul",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "testsPi::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-testsPi-Debug-ce1b196f97288635fbce.json",
+					"name" : "testsPi",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/artemakulov/Study/2 course/2 sem/C++/LongArithmetic/cmake-build-debug-coverage",
+		"source" : "/Users/artemakulov/Study/2 course/2 sem/C++/LongArithmetic"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

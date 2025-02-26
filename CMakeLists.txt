@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.23)
 project(LongArithmetic)
 
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
 
 file(GLOB BIGDECIMAL_SOURCES
         src/bigDecimalConstructor.cpp
