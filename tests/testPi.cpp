@@ -11,6 +11,6 @@ void testPi2() {
 }
 
 int main() {
-    //testPi1();
+    testPi1();
     testPi2();
 }
