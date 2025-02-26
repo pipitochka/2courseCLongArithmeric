@@ -7,4 +7,5 @@ int main()
     BigDecimal bg2 = BigDecimal("8", 12);
     std::cout << bg2 + bg1 << std::endl;
     std::cout << bg2 + bg2 << std::endl;
+    std::cout << BigDecimal::generatePiDigits(3);
 }
