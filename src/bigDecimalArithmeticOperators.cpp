@@ -1,4 +1,5 @@
 #include "../include/bigDecimal.h"
+#include <chrono>
 
 BigDecimal BigDecimal::operator+(const BigDecimal& other) const {
     if (this->_sign != other._sign) {
@@ -159,11 +160,6 @@ std::deque<int> subtract(const std::deque<int>& a, const std::deque<int>& b) {
         }
         result.push_front(tmp);
     }
-    
-    while (result.size() > 1 && result[0] == 0) {
-        result.pop_front();
-    }
-    
     return result;
 }
 
@@ -259,6 +255,7 @@ BigDecimal BigDecimal::operator/(const BigDecimal& other) const {
 
 
 BigDecimal BigDecimal::generatePiDigits(int n) {
+    const auto start{std::chrono::steady_clock::now()};
     n *= 7;
     n /= 2;
     BigDecimal sixteen("16", n);
@@ -289,5 +286,8 @@ BigDecimal BigDecimal::generatePiDigits(int n) {
         q = q / sixteen; 
     }
 
+    // const auto finish{std::chrono::steady_clock::now()};
+    // const std::chrono::duration<double> elapsed_seconds{finish - start};
+    // std::cout << elapsed_seconds << '\n';
     return result;
 }
